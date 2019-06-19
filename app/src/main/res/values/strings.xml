@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ViruApp</string>
+
+    <string name="email_address">Correo Electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="login_now">Iniciar Sesión</string>
+    <string name="dont_user">No tienes una cuenta?</string>
 </resources>
