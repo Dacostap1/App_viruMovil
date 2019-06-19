@@ -1,66 +1,73 @@
 package com.example.viruapp.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.viruapp.Model.Promotion;
-import com.example.viruapp.Model.Student;
+import com.example.viruapp.Model.Modul;
+
 import com.example.viruapp.R;
-import com.example.viruapp.ui.activity.ModulActivity;
+
 
 import java.util.ArrayList;
 
-public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHolder> {
+public class ModulAdapter extends RecyclerView.Adapter<ModulAdapter.ViewHolder> {
 
+    private ArrayList<Modul> mDataSet;
     private Context context;
-    private ArrayList<Student> mDataSet;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView textView;
-        public ViewHolder(TextView tv) {
-            super(tv);
-            textView = tv;
+        public TextView txt_name;
+        public TextView txt_solicitud;
+        public TextView txt_memo;
+
+
+        public ViewHolder(View v) {
+
+            super(v);
+            txt_name = v.findViewById(R.id.txt_name);
+            txt_solicitud = v.findViewById(R.id.txt_solicitud);
+            txt_memo = v.findViewById(R.id.txt_memo);
+
         }
     }
 
-    public StudentAdapter(Context context) {
+    public ModulAdapter(Context context) {
         this.context = context;
         mDataSet = new ArrayList<>(); //Inicializamos un ArrayList vacio para que no falle al no encontrar elementos al inicio
     }
 
-    public void setDataSet(ArrayList<Student> dataSet){
+    public void setDataSet(ArrayList<Modul> dataSet){
         mDataSet = dataSet;
         notifyDataSetChanged(); //Para indicar que hay cambios
     }
 
     // El layout manager invoca este método
     @Override
-    public StudentAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                        int viewType) {
+    public ModulAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                      int viewType) {
         // Creamos una nueva vista
-        TextView tv = (TextView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.student_view, parent, false);
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.modul_view, parent, false);
 
-        return new ViewHolder(tv);
+        return new ViewHolder(v);
     }
 
     // Este método reemplaza el contenido de cada view,
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - obtenemos un elemento del dataset según su posición
-        final Student student = mDataSet.get(position);
+        final Modul modul = mDataSet.get(position);
 
-        holder.textView.setText(student.getName());
-        holder.textView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ModulActivity.class);
-            intent.putExtra("student_id", student.getId());
-            context.startActivity(intent);
-        });
+        holder.txt_name.setText(modul.getName());
+        holder.txt_solicitud.setText(modul.getSolicitud());
+        holder.txt_memo.setText(modul.getMemorandum());
     }
 
     // Método que define la cantidad de elementos del RecyclerView

@@ -14,17 +14,28 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/tv_promoName"
+            android:id="@+id/txt_name"
             android:textColor="@color/colorPrimary"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nombre de la promoción" />
 
-        <ImageView
+        <TextView
+            android:id="@+id/txt_solicitud"
+            android:textColor="@color/colorPrimary"
             android:layout_gravity="center"
-            android:id="@+id/imgPromo"
-            android:layout_width="120dp"
-            android:layout_height="120dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre de la promoción" />
+
+        <TextView
+            android:id="@+id/txt_memo"
+            android:textColor="@color/colorPrimary"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre de la promoción" />
+
     </LinearLayout>
 </android.support.v7.widget.CardView>

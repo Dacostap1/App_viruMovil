@@ -1,5 +1,6 @@
 package com.example.viruapp.io;
 
+import com.example.viruapp.Model.Modul;
 import com.example.viruapp.Model.Promotion;
 import com.example.viruapp.Model.Login;
 import com.example.viruapp.Model.Student;
@@ -26,8 +27,11 @@ public interface AppViruApiService {
     @GET("student")
     Call<ArrayList<Student>> getStudents(@Header("Authorization") String authToken);
 
-    @GET("student/{student}")
-    Call<ArrayList<Student>> getStudentsbyPromotion(@Header("Authorization") String authToken, @Path("student") int promo_id);
+    @GET("student/{promo}")
+    Call<ArrayList<Student>> getStudentsbyPromotion(@Header("Authorization") String authToken, @Path("promo") int promo_id);
+
+    @GET("modul/{student}")
+    Call<ArrayList<Modul>> getModulbyStudent(@Header("Authorization") String authToken, @Path("student") int student_id);
 
 
 
