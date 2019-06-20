@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity implements Callback<User> {
             editor.putString("token", token);
             editor.commit();
 
-            Intent intent = new Intent(this, PromotionActivity.class);
+            Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
 
         }
