@@ -1,7 +1,9 @@
 package com.example.viruapp.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +13,8 @@ import android.widget.TextView;
 
 import com.example.viruapp.Model.Promotion;
 import com.example.viruapp.R;
-import com.example.viruapp.ui.activity.StudentActivity;
+import com.example.viruapp.ui.activity.HomeActivity;
+import com.example.viruapp.ui.activity.StudentListFragment;
 
 import java.util.ArrayList;
 
@@ -19,6 +22,7 @@ public class PromotionAdapter extends RecyclerView.Adapter<PromotionAdapter.View
 
     private ArrayList<Promotion> mDataSet;
     private Context context;
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -62,9 +66,17 @@ public class PromotionAdapter extends RecyclerView.Adapter<PromotionAdapter.View
 
         holder.txt_name.setText(promotion.getName());
         holder.imageView.setOnClickListener(v -> {
-                Intent intent = new Intent(context, StudentActivity.class);
-                intent.putExtra("promo_id", promotion.getId());
-                context.startActivity(intent);
+            Bundle bundle = new Bundle();
+            bundle.putInt("promo_id", promotion.getId());
+            StudentListFragment fragment = new StudentListFragment();
+            fragment.setArguments(bundle);
+            FragmentManager manager = ((HomeActivity)context).getSupportFragmentManager();
+            FragmentTransaction ft = manager.beginTransaction();
+
+            ft.replace(R.id.content_home, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
+
         });
     }
 

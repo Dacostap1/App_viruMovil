@@ -1,32 +1,36 @@
 package com.example.viruapp.ui.activity;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.viruapp.Model.Student;
 import com.example.viruapp.R;
+import com.example.viruapp.io.AppViruApiAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link StudentListFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link StudentListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class StudentListFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import com.example.viruapp.ui.adapter.StudentAdapter;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class StudentListFragment extends Fragment implements Callback<ArrayList<Student>> {
+
+    private StudentAdapter mAdapter;
+    private int promo_id;
+
+    RecyclerView recyclerView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -34,30 +38,12 @@ public class StudentListFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment StudentListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static StudentListFragment newInstance(String param1, String param2) {
-        StudentListFragment fragment = new StudentListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            promo_id = getArguments().getInt("promo_id");
         }
     }
 
@@ -65,7 +51,23 @@ public class StudentListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_student_list, container, false);
+        SharedPreferences preferences = getContext().getSharedPreferences("data", Context.MODE_PRIVATE);
+        String token =  "Bearer " + preferences.getString("token", "");
+
+        View vista = inflater.inflate(R.layout.fragment_student_list, container, false);
+
+        recyclerView = vista.findViewById(R.id.reclicler_view);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setHasFixedSize(true); //el tamaño será el mismo para todos
+        recyclerView.setLayoutManager(layoutManager);
+
+        mAdapter = new StudentAdapter(getContext());
+        recyclerView.setAdapter(mAdapter);
+
+        Call<ArrayList<Student>> call = AppViruApiAdapter.getApiService().getStudentsbyPromotion(token, promo_id);
+        call.enqueue(this);
+
+        return vista;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -92,16 +94,24 @@ public class StudentListFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    @Override
+    public void onResponse(Call<ArrayList<Student>> call, Response<ArrayList<Student>> response) {
+        if(response.isSuccessful()){
+            ArrayList<Student> students = response.body();
+            Log.d("RT", "tamaño de array => " + students.size());
+            mAdapter.setDataSet(students);
+
+        }else{
+            Toast.makeText(getContext(), "token es fake", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onFailure(Call<ArrayList<Student>> call, Throwable t) {
+        Toast.makeText(getContext(), "No hay conexion a internet", Toast.LENGTH_SHORT).show();
+    }
+
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
