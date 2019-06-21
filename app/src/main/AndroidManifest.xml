@@ -16,8 +16,6 @@
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".ui.activity.LoginActivity" />
-        <activity android:name=".ui.activity.ModulActivity" />
-        <activity android:name=".ui.activity.StudentActivity" />
         <activity android:name=".ui.activity.PromotionActivity" />
         <activity android:name=".ui.activity.MainActivity">
             <intent-filter>

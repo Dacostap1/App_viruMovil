@@ -1,7 +1,6 @@
 package com.example.viruapp.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,13 +9,10 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.viruapp.Model.Promotion;
 import com.example.viruapp.Model.Student;
 import com.example.viruapp.R;
 import com.example.viruapp.ui.activity.HomeActivity;
-import com.example.viruapp.ui.activity.ModulActivity;
 import com.example.viruapp.ui.activity.ModulListFragment;
-import com.example.viruapp.ui.activity.StudentListFragment;
 
 import java.util.ArrayList;
 
