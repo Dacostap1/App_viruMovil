@@ -19,7 +19,7 @@ import android.view.Menu;
 import com.example.viruapp.R;
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, StudentListFragment.OnFragmentInteractionListener, PromotionListFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, StudentListFragment.OnFragmentInteractionListener, PromotionListFragment.OnFragmentInteractionListener, ModulListFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

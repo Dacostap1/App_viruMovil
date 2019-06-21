@@ -2,6 +2,9 @@ package com.example.viruapp.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -10,7 +13,10 @@ import android.widget.TextView;
 import com.example.viruapp.Model.Promotion;
 import com.example.viruapp.Model.Student;
 import com.example.viruapp.R;
+import com.example.viruapp.ui.activity.HomeActivity;
 import com.example.viruapp.ui.activity.ModulActivity;
+import com.example.viruapp.ui.activity.ModulListFragment;
+import com.example.viruapp.ui.activity.StudentListFragment;
 
 import java.util.ArrayList;
 
@@ -57,9 +63,16 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
 
         holder.textView.setText(student.getName());
         holder.textView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ModulActivity.class);
-            intent.putExtra("student_id", student.getId());
-            context.startActivity(intent);
+            Bundle bundle = new Bundle();
+            bundle.putInt("student_id", student.getId());
+            ModulListFragment fragment = new ModulListFragment();
+            fragment.setArguments(bundle);
+            FragmentManager manager = ((HomeActivity)context).getSupportFragmentManager();
+            FragmentTransaction ft = manager.beginTransaction();
+
+            ft.replace(R.id.content_home, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
         });
     }
 
