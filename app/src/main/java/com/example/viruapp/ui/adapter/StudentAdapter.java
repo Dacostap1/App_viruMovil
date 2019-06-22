@@ -4,9 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.viruapp.Model.Student;
@@ -23,10 +26,15 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView textView;
-        public ViewHolder(TextView tv) {
-            super(tv);
-            textView = tv;
+        public TextView txt_student;
+        public ImageView img_student;
+        public CardView card_student;
+
+        public ViewHolder(View v) {
+            super(v);
+            txt_student = v.findViewById(R.id.txt_student);
+            img_student = v.findViewById(R.id.img_student);
+            card_student = v.findViewById(R.id.card_student);
         }
     }
 
@@ -44,11 +52,11 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
     @Override
     public StudentAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                         int viewType) {
-        // Creamos una nueva vista
-        TextView tv = (TextView) LayoutInflater.from(parent.getContext())
+
+        View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.student_view, parent, false);
 
-        return new ViewHolder(tv);
+        return new ViewHolder(v);
     }
 
     // Este método reemplaza el contenido de cada view,
@@ -57,8 +65,13 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         // - obtenemos un elemento del dataset según su posición
         final Student student = mDataSet.get(position);
 
-        holder.textView.setText(student.getName());
-        holder.textView.setOnClickListener(v -> {
+        holder.txt_student.setText(student.getName());
+        if(student.getGenero().equals("male")){
+            holder.img_student.setImageResource(R.drawable.avatar_male);
+        }else{
+            holder.img_student.setImageResource(R.drawable.avatar_female);
+        }
+        holder.card_student.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putInt("student_id", student.getId());
             ModulListFragment fragment = new ModulListFragment();
