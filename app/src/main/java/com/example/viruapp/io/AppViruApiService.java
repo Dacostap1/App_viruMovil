@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -20,6 +22,14 @@ public interface AppViruApiService {
 
     @POST("login")
     Call<User> login(@Body Login login);
+
+    @FormUrlEncoded
+    @POST("promotion")
+    Call<Promotion> createPromotion(
+        @Header("Authorization") String authToken,
+        @Field("name") String name,
+        @Field("user_id") int user
+    );
 
     @GET("promotion")
     Call<ArrayList<Promotion>> getPromotions(@Header("Authorization") String authToken);

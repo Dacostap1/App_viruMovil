@@ -15,8 +15,12 @@
 
     <string name="menu_promo">Promociones</string>
     <string name="menu_gallery">Galería</string>
-    <string name="menu_slideshow">Nose</string>
+    <string name="menu_slideshow">Crear Promoción</string>
     <string name="menu_exit">Salir</string>
+
+    <string name="txt_name_promo">Ingrese el Nombre de la Promoción</string>
+    <string name="create_promo">Crear Promoción</string>
+
 
 
     <!-- TODO: Remove or change this placeholder text -->

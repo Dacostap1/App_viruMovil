@@ -14,12 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import com.example.viruapp.R;
+import com.example.viruapp.ui.activity.fragments.CreatePromotionFragment;
 import com.example.viruapp.ui.activity.fragments.ModulListFragment;
 import com.example.viruapp.ui.activity.fragments.PromotionListFragment;
 import com.example.viruapp.ui.activity.fragments.StudentListFragment;
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, StudentListFragment.OnFragmentInteractionListener, PromotionListFragment.OnFragmentInteractionListener, ModulListFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, StudentListFragment.OnFragmentInteractionListener, PromotionListFragment.OnFragmentInteractionListener, CreatePromotionFragment.OnFragmentInteractionListener, ModulListFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +88,9 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
             miFragment = new StudentListFragment();
             fragmentSelected = true;
-        } else if (id == R.id.nav_nose) {
-
+        } else if (id == R.id.nav_create) {
+            miFragment = new CreatePromotionFragment();
+            fragmentSelected = true;
         } else if (id == R.id.nav_exit) {
 
         }
