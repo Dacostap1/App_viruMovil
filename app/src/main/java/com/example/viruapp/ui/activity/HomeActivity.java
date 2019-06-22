@@ -2,10 +2,7 @@ package com.example.viruapp.ui.activity;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -17,6 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import com.example.viruapp.R;
+import com.example.viruapp.ui.activity.fragments.ModulListFragment;
+import com.example.viruapp.ui.activity.fragments.PromotionListFragment;
+import com.example.viruapp.ui.activity.fragments.StudentListFragment;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, StudentListFragment.OnFragmentInteractionListener, PromotionListFragment.OnFragmentInteractionListener, ModulListFragment.OnFragmentInteractionListener {

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.example.viruapp.Model.Student;
 import com.example.viruapp.R;
 import com.example.viruapp.ui.activity.HomeActivity;
-import com.example.viruapp.ui.activity.ModulListFragment;
+import com.example.viruapp.ui.activity.fragments.ModulListFragment;
 
 import java.util.ArrayList;
 

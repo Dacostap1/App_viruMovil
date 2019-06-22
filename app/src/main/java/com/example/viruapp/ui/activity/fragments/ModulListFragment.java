@@ -1,22 +1,19 @@
-package com.example.viruapp.ui.activity;
+package com.example.viruapp.ui.activity.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.viruapp.Model.Promotion;
+import com.example.viruapp.Model.Modul;
 import com.example.viruapp.R;
 import com.example.viruapp.io.AppViruApiAdapter;
-import com.example.viruapp.ui.adapter.PromotionAdapter;
+import com.example.viruapp.ui.adapter.ModulAdapter;
 
 import java.util.ArrayList;
 
@@ -25,13 +22,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class PromotionListFragment extends Fragment implements Callback<ArrayList<Promotion>> {
+public class ModulListFragment extends Fragment implements Callback<ArrayList<Modul>> {
 
-    private PromotionAdapter mAdapter;
-    RecyclerView recyclerView;
+    private ModulAdapter mAdapter;
+    ViewPager viewPager;
     private OnFragmentInteractionListener mListener;
+    private int student_id;
 
-    public PromotionListFragment() {
+    public ModulListFragment() {
         // Required empty public constructor
     }
 
@@ -40,29 +38,41 @@ public class PromotionListFragment extends Fragment implements Callback<ArrayLis
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
+            student_id = getArguments().getInt("student_id");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         SharedPreferences preferences = getContext().getSharedPreferences("data", Context.MODE_PRIVATE);
         String token =  "Bearer " + preferences.getString("token", "");
 
-        View vista = inflater.inflate(R.layout.fragment_promotion_list, container, false);
-        recyclerView = vista.findViewById(R.id.reclicler_view);
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
-        recyclerView.setHasFixedSize(true); //el tamaño será el mismo para todos
-        recyclerView.setLayoutManager(layoutManager);
+        // Inflate the layout for this fragment
+        View vista = inflater.inflate(R.layout.fragment_modul_list, container, false);
 
+        viewPager = vista.findViewById(R.id.viewPager);
+        mAdapter = new ModulAdapter(getContext());
+        viewPager.setAdapter(mAdapter);
+        viewPager.setPadding(130, 0, 130, 0);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
 
-        mAdapter = new PromotionAdapter(getContext());
-        recyclerView.setAdapter(mAdapter);
+            }
 
+            @Override
+            public void onPageSelected(int i) {
 
-        Call<ArrayList<Promotion>> call = AppViruApiAdapter.getApiService().getPromotions(token);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+
+        Call<ArrayList<Modul>> call = AppViruApiAdapter.getApiService().getModulbyStudent(token, student_id);
         call.enqueue(this);
 
         return vista;
@@ -93,21 +103,16 @@ public class PromotionListFragment extends Fragment implements Callback<ArrayLis
     }
 
     @Override
-    public void onResponse(Call<ArrayList<Promotion>> call, Response<ArrayList<Promotion>> response) {
-        if(response.isSuccessful()){
-            ArrayList<Promotion> promotions = response.body();
-            Log.d("RT", "tamaño de array => " + promotions.size());
-            mAdapter.setDataSet(promotions);
-
-        }
-        else{
-            Toast.makeText(getContext(), "token is expiried", Toast.LENGTH_SHORT).show();
+    public void onResponse(Call<ArrayList<Modul>> call, Response<ArrayList<Modul>> response) {
+        if (response.isSuccessful()){
+            ArrayList<Modul> modul = response.body();
+            mAdapter.setDataSet(modul);
         }
     }
 
     @Override
-    public void onFailure(Call<ArrayList<Promotion>> call, Throwable t) {
-        Toast.makeText(getContext(), "No hay conexion a internet", Toast.LENGTH_SHORT).show();
+    public void onFailure(Call<ArrayList<Modul>> call, Throwable t) {
+
     }
 
 

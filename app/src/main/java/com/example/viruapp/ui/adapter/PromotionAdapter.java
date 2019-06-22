@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.example.viruapp.Model.Promotion;
 import com.example.viruapp.R;
 import com.example.viruapp.ui.activity.HomeActivity;
-import com.example.viruapp.ui.activity.StudentListFragment;
+import com.example.viruapp.ui.activity.fragments.StudentListFragment;
 
 import java.util.ArrayList;
 

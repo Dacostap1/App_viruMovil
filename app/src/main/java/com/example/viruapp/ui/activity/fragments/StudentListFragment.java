@@ -1,4 +1,4 @@
-package com.example.viruapp.ui.activity;
+package com.example.viruapp.ui.activity.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
