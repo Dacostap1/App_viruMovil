@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.ModulListFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/reclicler_view"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:overScrollMode="never"
+        android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp" />
+        android:layout_centerInParent="true">
 
-</FrameLayout>
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>

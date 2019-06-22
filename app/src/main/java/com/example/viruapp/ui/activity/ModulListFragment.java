@@ -5,8 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,7 @@ import retrofit2.Response;
 public class ModulListFragment extends Fragment implements Callback<ArrayList<Modul>> {
 
     private ModulAdapter mAdapter;
-    RecyclerView recyclerView;
+    ViewPager viewPager;
     private OnFragmentInteractionListener mListener;
     private int student_id;
 
@@ -50,15 +49,28 @@ public class ModulListFragment extends Fragment implements Callback<ArrayList<Mo
         String token =  "Bearer " + preferences.getString("token", "");
 
         // Inflate the layout for this fragment
-
         View vista = inflater.inflate(R.layout.fragment_modul_list, container, false);
-        recyclerView = vista.findViewById(R.id.reclicler_view);
-        recyclerView.setHasFixedSize(true); //el tamaño será el mismo para todos
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
 
+        viewPager = vista.findViewById(R.id.viewPager);
         mAdapter = new ModulAdapter(getContext());
-        recyclerView.setAdapter(mAdapter);
+        viewPager.setAdapter(mAdapter);
+        viewPager.setPadding(130, 0, 130, 0);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
 
         Call<ArrayList<Modul>> call = AppViruApiAdapter.getApiService().getModulbyStudent(token, student_id);
         call.enqueue(this);
