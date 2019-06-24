@@ -15,12 +15,15 @@ import android.view.Menu;
 
 import com.example.viruapp.R;
 import com.example.viruapp.ui.activity.fragments.CreatePromotionFragment;
+import com.example.viruapp.ui.activity.fragments.ModulDetailFragment;
 import com.example.viruapp.ui.activity.fragments.ModulListFragment;
 import com.example.viruapp.ui.activity.fragments.PromotionListFragment;
 import com.example.viruapp.ui.activity.fragments.StudentListFragment;
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, StudentListFragment.OnFragmentInteractionListener, PromotionListFragment.OnFragmentInteractionListener, CreatePromotionFragment.OnFragmentInteractionListener, ModulListFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, StudentListFragment.OnFragmentInteractionListener,
+        PromotionListFragment.OnFragmentInteractionListener, CreatePromotionFragment.OnFragmentInteractionListener,
+        ModulListFragment.OnFragmentInteractionListener, ModulDetailFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

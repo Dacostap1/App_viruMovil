@@ -52,7 +52,7 @@ public class CreatePromotionFragment extends Fragment implements Callback<Promot
        txt_name = vista.findViewById(R.id.edt_name);
        btn_registrar = vista.findViewById(R.id.btn_registrar);
        btn_registrar.setOnClickListener(v -> {
-           Call<Promotion> call = AppViruApiAdapter.getApiService().createPromotion(token, "bye", 1);
+           Call<Promotion> call = AppViruApiAdapter.getApiService().createPromotion(token, txt_name.getText().toString());
            call.enqueue(this);
        });
        return vista;
