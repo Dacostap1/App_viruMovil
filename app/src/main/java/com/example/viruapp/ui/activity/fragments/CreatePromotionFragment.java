@@ -49,6 +49,7 @@ public class CreatePromotionFragment extends Fragment implements Callback<Promot
        String token =  "Bearer " + preferences.getString("token", "");
         // Inflate the layout for this fragment
        View vista = inflater.inflate(R.layout.fragment_create_promotion, container, false);
+       getActivity().setTitle("Registro");
        txt_name = vista.findViewById(R.id.edt_name);
        btn_registrar = vista.findViewById(R.id.btn_registrar);
        btn_registrar.setOnClickListener(v -> {

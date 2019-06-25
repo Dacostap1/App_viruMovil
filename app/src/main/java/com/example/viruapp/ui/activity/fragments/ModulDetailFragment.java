@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.viruapp.Model.Modul;
@@ -27,7 +26,6 @@ import retrofit2.Response;
 public class ModulDetailFragment extends Fragment implements Callback<Modul> {
 
     private EditText edt_solicitud, edt_memo, edt_informe;
-    private TextView txt_name;
     private CheckBox check_recibo, check_proyecto, check_fsupervision;
     private Button btn_update;
     private int modul_id;
@@ -64,7 +62,8 @@ public class ModulDetailFragment extends Fragment implements Callback<Modul> {
 
         // Inflate the layout for this fragment
         View vista = inflater.inflate(R.layout.fragment_modul_detail, container, false);
-        txt_name = vista.findViewById(R.id.txt_name);
+        getActivity().setTitle(modul_name);
+
         edt_solicitud = vista.findViewById(R.id.modul_solicitud);
         edt_memo = vista.findViewById(R.id.modul_memo);
         edt_informe = vista.findViewById(R.id.modul_informe);
@@ -73,7 +72,6 @@ public class ModulDetailFragment extends Fragment implements Callback<Modul> {
         check_fsupervision = vista.findViewById(R.id.check_fsuper);
         btn_update = vista.findViewById(R.id.btn_update);
 
-        txt_name.setText(modul_name);
         edt_solicitud.setText(modul_solicitud);
         edt_memo.setText(modul_memo);
         edt_informe.setText(modul_informe);
@@ -91,8 +89,8 @@ public class ModulDetailFragment extends Fragment implements Callback<Modul> {
 
         btn_update.setOnClickListener(v -> {
             Call<Modul> call = AppViruApiAdapter.getApiService().updateModul(
-                    token,modul_id ,modul_id, edt_solicitud.getText().toString(),edt_memo.getText().toString(),edt_informe.getText().toString(),
-                    check_recibo.isChecked()? "1" : "0",check_proyecto.isChecked() ? "1" : "0", check_fsupervision.isChecked() ? "1" : "0"
+                    token, modul_id ,modul_id, edt_solicitud.getText().toString(), edt_memo.getText().toString(), edt_informe.getText().toString(),
+                    check_recibo.isChecked()? "1" : "0", check_proyecto.isChecked() ? "1" : "0", check_fsupervision.isChecked() ? "1" : "0"
             );
             call.enqueue(this);
         });

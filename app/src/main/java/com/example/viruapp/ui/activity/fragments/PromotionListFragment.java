@@ -57,7 +57,7 @@ public class PromotionListFragment extends Fragment implements Callback<ArrayLis
         recyclerView.setHasFixedSize(true); //el tamaño será el mismo para todos
         recyclerView.setLayoutManager(layoutManager);
 
-
+        getActivity().setTitle("Promociones");
         mAdapter = new PromotionAdapter(getContext());
         recyclerView.setAdapter(mAdapter);
 
@@ -96,6 +96,9 @@ public class PromotionListFragment extends Fragment implements Callback<ArrayLis
     public void onResponse(Call<ArrayList<Promotion>> call, Response<ArrayList<Promotion>> response) {
         if(response.isSuccessful()){
             ArrayList<Promotion> promotions = response.body();
+            if(promotions.isEmpty()){
+                Toast.makeText(getContext(), "No tiene Promociones", Toast.LENGTH_SHORT).show();
+            }
             Log.d("RT", "tamaño de array => " + promotions.size());
             mAdapter.setDataSet(promotions);
 

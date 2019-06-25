@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity implements Callback<User> {
 
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
+            finish();
 
         }
         else{

@@ -55,6 +55,7 @@ public class StudentListFragment extends Fragment implements Callback<ArrayList<
         String token =  "Bearer " + preferences.getString("token", "");
 
         View vista = inflater.inflate(R.layout.fragment_student_list, container, false);
+        getActivity().setTitle("Alumnos");
 
         recyclerView = vista.findViewById(R.id.reclicler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -98,6 +99,9 @@ public class StudentListFragment extends Fragment implements Callback<ArrayList<
     public void onResponse(Call<ArrayList<Student>> call, Response<ArrayList<Student>> response) {
         if(response.isSuccessful()){
             ArrayList<Student> students = response.body();
+            if(students.isEmpty()){
+                Toast.makeText(getContext(), "No tiene alumnos", Toast.LENGTH_SHORT).show();
+            }
             Log.d("RT", "tamaño de array => " + students.size());
             mAdapter.setDataSet(students);
 

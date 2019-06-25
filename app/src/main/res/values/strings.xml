@@ -21,9 +21,8 @@
     <string name="txt_name_promo">Ingrese el Nombre de la Promoción</string>
     <string name="create_promo">Crear Promoción</string>
 
-    <string name="txt_name">Modulo</string>
     <string name="txt_solicitud">Fecha de Solicitud</string>
-    <string name="txt_memor">Fecha de Memorandum</string>
+    <string name="txt_memo">Fecha de Memorandum</string>
     <string name="txt_informe">Informe/Horas</string>
     <string name="check_recibo">Tiene Recibo</string>
     <string name="check_proyecto">Tiene Proyecto</string>

@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.viruapp.Model.Modul;
 import com.example.viruapp.R;
@@ -81,7 +80,6 @@ public class ModulAdapter extends PagerAdapter {
             ft.replace(R.id.content_home, fragment);
             ft.addToBackStack(null);
             ft.commit();
-            Toast.makeText(context, "Modul_id = " + modul.getRecibo(), Toast.LENGTH_SHORT).show();
         });
 
         container.addView(view,0);

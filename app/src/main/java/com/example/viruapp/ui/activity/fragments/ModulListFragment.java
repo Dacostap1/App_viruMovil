@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.viruapp.Model.Modul;
 import com.example.viruapp.R;
@@ -50,6 +51,7 @@ public class ModulListFragment extends Fragment implements Callback<ArrayList<Mo
 
         // Inflate the layout for this fragment
         View vista = inflater.inflate(R.layout.fragment_modul_list, container, false);
+        getActivity().setTitle("Módulos");
 
         viewPager = vista.findViewById(R.id.viewPager);
         mAdapter = new ModulAdapter(getContext());
@@ -106,6 +108,9 @@ public class ModulListFragment extends Fragment implements Callback<ArrayList<Mo
     public void onResponse(Call<ArrayList<Modul>> call, Response<ArrayList<Modul>> response) {
         if (response.isSuccessful()){
             ArrayList<Modul> modul = response.body();
+            if(modul.isEmpty()){
+                Toast.makeText(getContext(), "No tiene módulos", Toast.LENGTH_SHORT).show();
+            }
             mAdapter.setDataSet(modul);
         }
     }
