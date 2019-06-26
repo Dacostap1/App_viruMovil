@@ -6,9 +6,11 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.viruapp.Model.Modul;
@@ -53,14 +55,24 @@ public class ModulAdapter extends PagerAdapter {
 
         final Modul modul = mDataSet.get(position);
 
-        TextView nombre, solicitud;
+        CardView cardmodul;
+        ImageView img_modul;
+        TextView nombre;
+
         nombre = view.findViewById(R.id.txt_name);
-        solicitud = view.findViewById(R.id.txt_solicitud);
+        img_modul = view.findViewById(R.id.img_modul);
+        cardmodul = view.findViewById(R.id.card_modul);
 
         nombre.setText(modul.getName());
-        solicitud.setText(modul.getSolicitud());
 
-        nombre.setOnClickListener(v -> {
+        if(modul.getMemorandum()==null||modul.getSolicitud()==null||modul.getInforme()==null||
+           modul.getRecibo().contentEquals("0")||modul.getProyecto().contentEquals("0")||modul.getF_supervision().contentEquals("0")){
+            img_modul.setImageResource(R.drawable.imcompleto);
+        }else{
+            img_modul.setImageResource(R.drawable.completo);
+        }
+
+        cardmodul.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putInt("modul_id", modul.getId());
             bundle.putString("modul_name", modul.getName());
