@@ -14,8 +14,11 @@
         <activity
             android:name=".ui.activity.HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".ui.activity.LoginActivity" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"></activity> // bloquear giro es el config changes
+        <activity android:name=".ui.activity.LoginActivity"
+            android:screenOrientation="portrait"/> //orientacion por defecto vertical
         <activity android:name=".ui.activity.PromotionActivity" />
         <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
