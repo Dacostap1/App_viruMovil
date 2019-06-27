@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity implements Callback<User> {
 
     private Button btn_login;
     private EditText txt_user, txt_password;
+    private String user, password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +37,8 @@ public class LoginActivity extends AppCompatActivity implements Callback<User> {
 
 
     public void Login(View view){
-        String user = txt_user.getText().toString();
-        String password = txt_password.getText().toString();
+         user = txt_user.getText().toString();
+         password = txt_password.getText().toString();
 
         Login login = new Login(user, password);
         Call<User> call = AppViruApiAdapter.getApiService().login(login);
@@ -55,6 +56,8 @@ public class LoginActivity extends AppCompatActivity implements Callback<User> {
             SharedPreferences preferences = getSharedPreferences("data", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("token", token);
+            editor.putString("user", user);
+            editor.putString("pass", password);
             editor.commit();
 
             Intent intent = new Intent(this, HomeActivity.class);
