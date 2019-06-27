@@ -118,4 +118,10 @@ public class HomeActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
+    }
 }
