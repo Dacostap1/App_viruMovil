@@ -74,6 +74,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         holder.card_student.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putInt("student_id", student.getId());
+            bundle.putString("student_name", student.getName());
             ModulListFragment fragment = new ModulListFragment();
             fragment.setArguments(bundle);
             FragmentManager manager = ((HomeActivity)context).getSupportFragmentManager();

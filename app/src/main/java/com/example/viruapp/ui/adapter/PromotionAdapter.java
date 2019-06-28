@@ -65,6 +65,7 @@ public class PromotionAdapter extends RecyclerView.Adapter<PromotionAdapter.View
         final Promotion promotion = mDataSet.get(position);
 
         holder.txt_name.setText(promotion.getName());
+        holder.imageView.setImageResource(R.drawable.promo);
         holder.imageView.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putInt("promo_id", promotion.getId());

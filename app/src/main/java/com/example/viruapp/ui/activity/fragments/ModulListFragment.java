@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.viruapp.Model.Modul;
@@ -27,8 +28,10 @@ public class ModulListFragment extends Fragment implements Callback<ArrayList<Mo
 
     private ModulAdapter mAdapter;
     ViewPager viewPager;
+    private TextView nombreStudent;
     private OnFragmentInteractionListener mListener;
     private int student_id;
+    private String student_name;
 
     public ModulListFragment() {
         // Required empty public constructor
@@ -40,6 +43,7 @@ public class ModulListFragment extends Fragment implements Callback<ArrayList<Mo
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             student_id = getArguments().getInt("student_id");
+            student_name = getArguments().getString("student_name");
         }
     }
 
@@ -54,9 +58,11 @@ public class ModulListFragment extends Fragment implements Callback<ArrayList<Mo
         getActivity().setTitle("Módulos");
 
         viewPager = vista.findViewById(R.id.viewPager);
+        nombreStudent = vista.findViewById(R.id.student_name);
+        nombreStudent.setText("Alumno: \n"+ student_name);
         mAdapter = new ModulAdapter(getContext());
         viewPager.setAdapter(mAdapter);
-        viewPager.setPadding(130, 0, 130, 0);
+        viewPager.setPadding(200, 0, 150, 0);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {

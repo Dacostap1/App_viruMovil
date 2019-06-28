@@ -14,6 +14,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.viruapp.R;
 import com.example.viruapp.ui.activity.fragments.CreatePromotionFragment;
@@ -27,6 +29,7 @@ public class HomeActivity extends AppCompatActivity
         PromotionListFragment.OnFragmentInteractionListener, CreatePromotionFragment.OnFragmentInteractionListener,
         ModulListFragment.OnFragmentInteractionListener, ModulDetailFragment.OnFragmentInteractionListener {
 
+    private TextView txt_user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,13 +37,20 @@ public class HomeActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        View HeadView = navigationView.getHeaderView(0);  //Obtenemos primero la referencia al NavHeader
+        txt_user = HeadView.findViewById(R.id.usuario);
+
+        SharedPreferences preferences = getSharedPreferences("data", Context.MODE_PRIVATE);
+        String user = preferences.getString("user","");
+        txt_user.setText(user);
+
         Fragment fragment = new PromotionListFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.content_home, fragment).commit();
         navigationView.setNavigationItemSelectedListener(this);
@@ -87,7 +97,7 @@ public class HomeActivity extends AppCompatActivity
         Fragment miFragment = null;
         boolean fragmentSelected = false;
 
-        if (id == R.id.nav_home) {
+        if (id == R.id.nav_promo) {
             miFragment = new PromotionListFragment();
             fragmentSelected = true;
         } else if (id == R.id.nav_gallery) {
