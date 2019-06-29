@@ -69,6 +69,7 @@ public class PromotionAdapter extends RecyclerView.Adapter<PromotionAdapter.View
         holder.imageView.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putInt("promo_id", promotion.getId());
+            bundle.putString("promo_name", promotion.getName());
             StudentListFragment fragment = new StudentListFragment();
             fragment.setArguments(bundle);
             FragmentManager manager = ((HomeActivity)context).getSupportFragmentManager();

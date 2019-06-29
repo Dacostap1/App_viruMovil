@@ -29,6 +29,7 @@ public class StudentListFragment extends Fragment implements Callback<ArrayList<
 
     private StudentAdapter mAdapter;
     private int promo_id;
+    private String promo_name;
 
     RecyclerView recyclerView;
 
@@ -44,6 +45,7 @@ public class StudentListFragment extends Fragment implements Callback<ArrayList<
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             promo_id = getArguments().getInt("promo_id");
+            promo_name = getArguments().getString("promo_name");
         }
     }
 
@@ -55,7 +57,7 @@ public class StudentListFragment extends Fragment implements Callback<ArrayList<
         String token =  "Bearer " + preferences.getString("token", "");
 
         View vista = inflater.inflate(R.layout.fragment_student_list, container, false);
-        getActivity().setTitle("Alumnos");
+        getActivity().setTitle("Promoción: "+promo_name);
 
         recyclerView = vista.findViewById(R.id.reclicler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());

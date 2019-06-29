@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#777474</color>
+    <color name="colorPrimary">#5F5D5D</color>
     <color name="colorPrimaryDark">#18181B</color>
     <color name="colorAccent">#FF4081</color>
     <color name="dark_blue">#3023AE</color>
     <color name="purple">#c86dd7</color>
 
     <color name="splash">#000000</color>
+    <color name="header">#777474</color>
 
     <color name="login_form_details">#ccffffff</color>
     <color name="login_form_details_light">#1affffff</color>
