@@ -1,6 +1,9 @@
 package com.example.viruapp.ui.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
@@ -12,15 +15,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.viruapp.Model.Modul;
 import com.example.viruapp.R;
+import com.example.viruapp.io.AppViruApiAdapter;
 import com.example.viruapp.ui.activity.HomeActivity;
 import com.example.viruapp.ui.activity.fragments.ModulDetailFragment;
+import com.example.viruapp.ui.activity.fragments.ModulListFragment;
+
 
 import java.util.ArrayList;
 
-public class ModulAdapter extends PagerAdapter {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class ModulAdapter extends PagerAdapter implements Callback<Void> {
 
     private ArrayList<Modul> mDataSet;
 
@@ -94,12 +105,45 @@ public class ModulAdapter extends PagerAdapter {
             ft.commit();
         });
 
+        cardmodul.setOnLongClickListener(v -> {
+            ShowDelateModulDialog(modul.getId(), modul.getName(),container,view);
+            return true;
+        });
+
         container.addView(view,0);
         return view;
+    }
+
+
+    private void ShowDelateModulDialog(int id, String name,ViewGroup container, View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Eliminar");
+        builder.setMessage("Seguro de eliminar el "+ name);
+        SharedPreferences preferences = context.getSharedPreferences("data", Context.MODE_PRIVATE);
+        String token = "Bearer " + preferences.getString("token", "");
+        builder.setPositiveButton("Si", (dialog, which) -> {
+            Call<Void> call = AppViruApiAdapter.getApiService().deleteModul(token, id);
+            call.enqueue(this);
+            container.removeView(view);
+        });
+        builder.setNegativeButton("No", (dialog, which) -> dialog.dismiss());
+        builder.create().show();
+    }
+
+    @Override
+    public void onResponse(Call<Void> call, Response<Void> response) {
+        Toast.makeText(context, "Módulo eliminado", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onFailure(Call<Void> call, Throwable t) {
+        Toast.makeText(context, "No se pudo eliminar", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View)object );
     }
+
 }
+
