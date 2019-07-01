@@ -2,7 +2,6 @@ package com.example.viruapp.ui.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +12,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +22,7 @@ import com.example.viruapp.R;
 import com.example.viruapp.io.AppViruApiAdapter;
 import com.example.viruapp.ui.activity.HomeActivity;
 import com.example.viruapp.ui.activity.fragments.ModulDetailFragment;
-import com.example.viruapp.ui.activity.fragments.ModulListFragment;
+
 
 
 import java.util.ArrayList;
@@ -75,6 +75,7 @@ public class ModulAdapter extends PagerAdapter implements Callback<Void> {
         cardmodul = view.findViewById(R.id.card_modul);
 
         nombre.setText(modul.getName());
+        cardmodul.setAnimation(AnimationUtils.loadAnimation(context, R.anim.modul_transition_animation));
 
         if(modul.getMemorandum()==null||modul.getSolicitud()==null||modul.getInforme()==null||
            modul.getRecibo().contentEquals("0")||modul.getProyecto().contentEquals("0")||modul.getF_supervision().contentEquals("0")){
