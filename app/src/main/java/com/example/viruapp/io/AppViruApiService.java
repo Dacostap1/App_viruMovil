@@ -46,7 +46,7 @@ public interface AppViruApiService {
 
     @FormUrlEncoded
     @PUT("modul/{modul}")
-    Call<Modul> updateModul(
+    Call<Void> updateModul(
             @Header("Authorization") String authToken,
             @Path("modul") int modul,
             @Field("id") int id,

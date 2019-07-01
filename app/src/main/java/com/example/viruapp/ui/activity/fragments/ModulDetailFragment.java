@@ -1,5 +1,7 @@
 package com.example.viruapp.ui.activity.fragments;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -13,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.viruapp.Model.Modul;
 import com.example.viruapp.R;
 import com.example.viruapp.io.AppViruApiAdapter;
@@ -23,9 +26,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ModulDetailFragment extends Fragment implements Callback<Modul> {
+public class ModulDetailFragment extends Fragment implements Callback<Void> {
 
     private EditText edt_solicitud, edt_memo, edt_informe;
+    private LottieAnimationView animationView;
     private CheckBox check_recibo, check_proyecto, check_fsupervision;
     private Button btn_update;
     private int modul_id;
@@ -71,6 +75,7 @@ public class ModulDetailFragment extends Fragment implements Callback<Modul> {
         check_proyecto = vista.findViewById(R.id.check_proyecto);
         check_fsupervision = vista.findViewById(R.id.check_fsuper);
         btn_update = vista.findViewById(R.id.btn_update);
+        animationView = vista.findViewById(R.id.animation_view);
 
         edt_solicitud.setText(modul_solicitud);
         edt_memo.setText(modul_memo);
@@ -88,7 +93,7 @@ public class ModulDetailFragment extends Fragment implements Callback<Modul> {
         }
 
         btn_update.setOnClickListener(v -> {
-            Call<Modul> call = AppViruApiAdapter.getApiService().updateModul(
+            Call<Void> call = AppViruApiAdapter.getApiService().updateModul(
                     token, modul_id ,modul_id, edt_solicitud.getText().toString(), edt_memo.getText().toString(), edt_informe.getText().toString(),
                     check_recibo.isChecked()? "1" : "0", check_proyecto.isChecked() ? "1" : "0", check_fsupervision.isChecked() ? "1" : "0"
             );
@@ -122,16 +127,22 @@ public class ModulDetailFragment extends Fragment implements Callback<Modul> {
     }
 
     @Override
-    public void onResponse(Call<Modul> call, Response<Modul> response) {
-        if (response.isSuccessful()){
-            Toast.makeText(getContext(), "Modulo actualizado", Toast.LENGTH_SHORT).show();
+    public void onResponse(Call<Void> call, Response<Void> response) {
+        if(response.isSuccessful()){
+            animationView.playAnimation();
+            animationView.addAnimatorListener(new AnimatorListenerAdapter() {
+                @Override public void onAnimationEnd(Animator animation) {
+                    animationView.setProgress(0);
+                }
+            });
         }
     }
 
     @Override
-    public void onFailure(Call<Modul> call, Throwable t) {
+    public void onFailure(Call<Void> call, Throwable t) {
 
     }
+
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
