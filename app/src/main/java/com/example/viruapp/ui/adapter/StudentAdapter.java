@@ -9,7 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.viruapp.Model.Student;
@@ -29,9 +31,11 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         public TextView txt_student;
         public ImageView img_student;
         public CardView card_student;
+        public LinearLayout container_student;
 
         public ViewHolder(View v) {
             super(v);
+            container_student = v.findViewById(R.id.container_student);
             txt_student = v.findViewById(R.id.txt_student);
             img_student = v.findViewById(R.id.img_student);
             card_student = v.findViewById(R.id.card_student);
@@ -64,6 +68,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - obtenemos un elemento del dataset según su posición
         final Student student = mDataSet.get(position);
+
+        holder.container_student.setAnimation(AnimationUtils.loadAnimation(context, R.anim.student_transition_animation ));
 
         holder.txt_student.setText(student.getName());
         if(student.getGenero().equals("male")){
