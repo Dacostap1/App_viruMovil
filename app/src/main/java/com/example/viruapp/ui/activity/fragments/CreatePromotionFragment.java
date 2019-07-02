@@ -1,5 +1,7 @@
 package com.example.viruapp.ui.activity.fragments;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -10,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.viruapp.Model.Promotion;
 import com.example.viruapp.R;
 import com.example.viruapp.io.AppViruApiAdapter;
@@ -24,6 +26,7 @@ import retrofit2.Response;
 public class CreatePromotionFragment extends Fragment implements Callback<Promotion> {
 
     private OnFragmentInteractionListener mListener;
+    private LottieAnimationView animationView;
     private EditText txt_name;
     private Button btn_registrar;
 
@@ -52,6 +55,7 @@ public class CreatePromotionFragment extends Fragment implements Callback<Promot
        getActivity().setTitle("Registro");
        txt_name = vista.findViewById(R.id.edt_name);
        btn_registrar = vista.findViewById(R.id.btn_registrar);
+       animationView = vista.findViewById(R.id.check_create);
        btn_registrar.setOnClickListener(v -> {
            Call<Promotion> call = AppViruApiAdapter.getApiService().createPromotion(token, txt_name.getText().toString());
            call.enqueue(this);
@@ -90,7 +94,12 @@ public class CreatePromotionFragment extends Fragment implements Callback<Promot
     @Override
     public void onResponse(Call<Promotion> call, Response<Promotion> response) {
         if(response.isSuccessful()){
-            Toast.makeText(getContext(), "Se agrego "+ txt_name.getText().toString(), Toast.LENGTH_SHORT).show();
+            animationView.playAnimation();
+            animationView.addAnimatorListener(new AnimatorListenerAdapter() {
+                @Override public void onAnimationEnd(Animator animation) {
+                    animationView.setProgress(0);
+                }
+            });
         }
     }
 
