@@ -59,7 +59,7 @@ public class ModulListFragment extends Fragment implements Callback<ArrayList<Mo
 
         mAdapter = new ModulAdapter(getContext());
         viewPager.setAdapter(mAdapter);
-        viewPager.setPadding(200, 0, 150, 0);
+        viewPager.setPadding(190, 0, 60, 0);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {

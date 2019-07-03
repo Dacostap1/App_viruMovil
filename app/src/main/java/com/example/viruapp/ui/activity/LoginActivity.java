@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements Callback<User> {
     @Override
     public void onResponse(Call<User> call, Response<User> response) {
         if (response.isSuccessful()){
-            Toast.makeText(LoginActivity.this, response.body().getToken(), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(LoginActivity.this, response.body().getToken(), Toast.LENGTH_SHORT).show();
             String token = response.body().getToken();
 
             SharedPreferences preferences = getSharedPreferences("data", Context.MODE_PRIVATE);
