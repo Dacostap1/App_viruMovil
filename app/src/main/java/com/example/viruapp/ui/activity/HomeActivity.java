@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.viruapp.R;
 import com.example.viruapp.ui.activity.fragments.CreatePromotionFragment;
+import com.example.viruapp.ui.activity.fragments.GaleriaFragment;
 import com.example.viruapp.ui.activity.fragments.ModulDetailFragment;
 import com.example.viruapp.ui.activity.fragments.ModulListFragment;
 import com.example.viruapp.ui.activity.fragments.PromotionListFragment;
@@ -27,7 +28,7 @@ import com.example.viruapp.ui.activity.fragments.StudentListFragment;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, StudentListFragment.OnFragmentInteractionListener,
         PromotionListFragment.OnFragmentInteractionListener, CreatePromotionFragment.OnFragmentInteractionListener,
-        ModulListFragment.OnFragmentInteractionListener, ModulDetailFragment.OnFragmentInteractionListener {
+        GaleriaFragment.OnFragmentInteractionListener, ModulListFragment.OnFragmentInteractionListener, ModulDetailFragment.OnFragmentInteractionListener {
 
     private TextView txt_user;
     @Override
@@ -101,7 +102,7 @@ public class HomeActivity extends AppCompatActivity
             miFragment = new PromotionListFragment();
             fragmentSelected = true;
         } else if (id == R.id.nav_gallery) {
-            miFragment = new StudentListFragment();
+            miFragment = new GaleriaFragment();
             fragmentSelected = true;
         } else if (id == R.id.nav_create) {
             miFragment = new CreatePromotionFragment();
