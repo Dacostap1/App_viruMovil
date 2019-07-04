@@ -7,7 +7,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     defaultConfig {
-        applicationId "com.example.viruapp"
+        applicationId "com.dacosta.viruapp"
         minSdkVersion 23
         targetSdkVersion 28
         versionCode 1
