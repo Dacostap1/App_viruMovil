@@ -21,6 +21,7 @@ public class GaleriaFragment extends Fragment {
     private ViewPager viewPager;
     private GaleriaAdapter adapter;
     private ArrayList<Foto> fotos;
+    private int value = 130;
 
     private OnFragmentInteractionListener mListener;
 
@@ -54,7 +55,10 @@ public class GaleriaFragment extends Fragment {
         adapter = new GaleriaAdapter(getContext());
         adapter.setFotos(fotos);
         viewPager.setAdapter(adapter);
-        viewPager.setPadding(130,0,130,0);
+        if(vista.findViewById(R.id.txt_galeria) != null){
+            value  = 50;
+        }
+        viewPager.setPadding(value,0,value,0);
 
         return vista;
     }

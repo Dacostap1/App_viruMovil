@@ -30,6 +30,7 @@ public class ModulListFragment extends Fragment implements Callback<ArrayList<Mo
     private OnFragmentInteractionListener mListener;
     private int student_id;
     private String student_name;
+    private int value = 190;
 
     public ModulListFragment() {
         // Required empty public constructor
@@ -59,7 +60,10 @@ public class ModulListFragment extends Fragment implements Callback<ArrayList<Mo
 
         mAdapter = new ModulAdapter(getContext());
         viewPager.setAdapter(mAdapter);
-        viewPager.setPadding(190, 0, 60, 0);
+        if(vista.findViewById(R.id.txt_ListModul) == null){
+            value = 150;
+        }
+        viewPager.setPadding(value, 0, 60, 0);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {

@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="104dp"
         android:text="@string/txt_name_promo"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
     <EditText
         android:id="@+id/edt_name"
@@ -24,11 +24,10 @@
         android:layout_below="@+id/txt_name"
         android:layout_alignStart="@+id/txt_name"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="22dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:textSize="14sp" />
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/btn_registrar"

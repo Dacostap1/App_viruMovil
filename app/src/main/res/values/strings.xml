@@ -17,7 +17,7 @@
     <string name="menu_slideshow">Crear Promoción</string>
     <string name="menu_exit">Cerrar Sesión</string>
 
-    <string name="txt_name_promo">Ingrese el Nombre de la Promoción</string>
+    <string name="txt_name_promo">Ingrese el nombre de la promoción</string>
     <string name="create_promo">Crear Promoción</string>
 
     <string name="txt_seleccione">Seleccione un Módulo</string>

@@ -37,9 +37,9 @@
                     android:id="@+id/txt_student"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="23dp"
+                    android:layout_marginTop="20dp"
                     android:text="Nombre"
-                    android:textSize="10sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
